@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for character encoding and responsive viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassCraft v3.2</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Settings Page: Displayed for first-time users to configure language, theme, and passphrase length -->
+    <div id="settings-page" class="screen active">
+        <h2>Settings</h2>
+        <!-- Language selection dropdown -->
+        <p>
+            Language: 
+            <select id="settings-language">
+                <option value="" disabled selected>Select a language</option>
+                <option value="en">English</option>
+                <option value="fr">French</option>
+            </select>
+        </p>
+        <!-- Instruction for theme selection, hidden once a language is selected -->
+        <p id="theme-instruction" class="instruction">Please select a language to choose a theme.</p>
+        <!-- Theme selection dropdown, populated dynamically based on language -->
+        <p>
+            Theme: 
+            <select id="settings-theme" disabled>
+                <!-- Options will be populated dynamically by JavaScript -->
+            </select>
+        </p>
+        <!-- Passphrase length selection dropdown -->
+        <p>
+            Passphrase Length: 
+            <select id="settings-length">
+                <option value="4">4 words</option>
+                <option value="5" selected>5 words</option>
+                <option value="6">6 words</option>
+            </select>
+        </p>
+        <!-- Save button to store settings and proceed -->
+        <button id="settings-save">Save</button>
+        <!-- Reset button to clear settings -->
+        <button id="settings-reset">Reset</button>
+        <!-- Footer with navigation links to Help, Credits, and Developer pages -->
+        <footer>
+            <a href="#" id="settings-help-link">Help</a> | <a href="#" id="settings-credits-link">Credits</a> | <a href="#" id="settings-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Home Page: Entry point for returning users -->
+    <div id="home-page" class="screen">
+        <h1>PassCraft v3.2</h1>
+        <!-- Greeting message, dynamically set based on user status -->
+        <h2 id="greeting"></h2>
+        <!-- Display of current settings (language, theme, length) -->
+        <p id="current-settings"></p>
+        <!-- Continue button to proceed to method selection -->
+        <button id="home-continue">Continue</button>
+        <!-- Settings button to revisit settings -->
+        <button id="settings-btn">Settings</button>
+        <footer>
+            <a href="#" id="home-help-link">Help</a> | <a href="#" id="home-credits-link">Credits</a> | <a href="#" id="home-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Method Selection Page: Allows users to choose between entering numbers or rolling dice -->
+    <div id="method-page" class="screen">
+        <h2>Choose Your Method</h2>
+        <div class="method-buttons">
+            <!-- Button to manually enter dice rolls -->
+            <button id="method-enter">Enter Numbers</button>
+            <!-- Button to simulate dice rolls -->
+            <button id="method-roll">Roll for Me</button>
+        </div>
+        <!-- Back button to return to the home page -->
+        <button id="method-back">Back</button>
+        <footer>
+            <a href="#" id="method-help-link">Help</a> | <a href="#" id="method-credits-link">Credits</a> | <a href="#" id="method-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Enter Numbers Page: For users to manually input 5-digit numbers from dice rolls -->
+    <div id="enter-page" class="screen">
+        <h2>Enter Your Numbers</h2>
+        <!-- Instruction for entering dice roll numbers -->
+        <p id="enter-instruction" class="instruction">Roll 5 dice (or one die 5 times). Each die roll (1-6) forms a 5-digit number (e.g., rolling 1, 2, 3, 4, 5 gives 12345). Enter the number below:</p>
+        <!-- Counter showing current word position -->
+        <p id="enter-counter">Word 1 of 5</p>
+        <!-- Input field for the 5-digit number -->
+        <input type="text" id="enter-input" maxlength="5" placeholder="e.g., 12345" aria-describedby="enter-instruction">
+        <br>
+        <!-- Next button to add the word to the passphrase -->
+        <button id="enter-next">Next</button>
+        <br>
+        <!-- Back button to return to method selection -->
+        <button id="enter-back">Back</button>
+        <!-- Display of the current passphrase being built -->
+        <p id="enter-passphrase-display">Passphrase: <span id="enter-passphrase-words"></span></p>
+        <footer>
+            <a href="#" id="enter-help-link">Help</a> | <a href="#" id="enter-credits-link">Credits</a> | <a href="#" id="enter-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Roll for Me Page: Simulates dice rolls to generate numbers automatically -->
+    <div id="roll-page" class="screen">
+        <h2>Roll for Me</h2>
+        <!-- Instruction for rolling dice -->
+        <p class="instruction">Click 'Roll Now' to simulate rolling 5 dice. Each roll generates a 5-digit number (1-6 per digit), which maps to a word in your passphrase.</p>
+        <!-- Counter showing current word position -->
+        <p id="roll-counter" class="hidden">Word 1 of 5</p>
+        <!-- Display of the generated 5-digit number -->
+        <input type="text" id="roll-display" readonly placeholder="Click 'Roll Now' to start">
+        <br>
+        <!-- Roll Now button to generate a new number -->
+        <button id="roll-next">Roll Now</button>
+        <br>
+        <!-- Back button to return to method selection -->
+        <button id="roll-back">Back</button>
+        <!-- Display of the current passphrase being built -->
+        <p id="roll-passphrase-display" class="hidden">Passphrase: <span id="roll-passphrase-words"></span></p>
+        <footer>
+            <a href="#" id="roll-help-link">Help</a> | <a href="#" id="roll-credits-link">Credits</a> | <a href="#" id="roll-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Final Passphrase Page: Displays the generated passphrase with options to manage it -->
+    <div id="final-page" class="screen">
+        <h2>Here's Your Passphrase</h2>
+        <!-- Display of the final passphrase -->
+        <p id="final-passphrase"></p>
+        <!-- Feedback message for copy action -->
+        <p id="copy-feedback" class="hidden">Copied to clipboard!</p>
+        <!-- Copy button to copy the passphrase to clipboard -->
+        <button id="final-copy" aria-label="Copy passphrase to clipboard">Copy</button>
+        <!-- Memorize button to show a mnemonic tip -->
+        <button id="final-memorize" aria-label="Show tips to memorize passphrase">Memorize</button>
+        <!-- Strenghen button to enhance the passphrase -->
+        <button id="final-enhance" aria-label="Strenghen passphrase with uppercase, number, and symbol">Strenghen</button>
+        <!-- Revert button to undo enhancement (hidden by default) -->
+        <button id="final-revert" class="hidden" aria-label="Revert to original passphrase">Revert</button>
+        <!-- Restart button to start over -->
+        <button id="final-restart" aria-label="Restart the app">Restart</button>
+        <!-- Mnemonic tip section, shown when Memorize is clicked -->
+        <div id="mnemonic-tip" class="mnemonic-tip hidden">
+            <p><strong>Memorization Tip:</strong> <span id="mnemonic-text"></span></p>
+        </div>
+        <!-- Instructions for managing the passphrase -->
+        <p id="final-instructions" class="instruction">
+            Use the buttons above to manage your passphrase:<br>
+            - <strong>Copy</strong>: Copies the passphrase to your clipboard.<br>
+            - <strong>Memorize</strong>: Shows a story to help you remember it.<br>
+            - <strong>Strenghen</strong>: Adds an uppercase letter, number, and symbol.<br>
+            - <strong>Restart</strong>: Starts over to generate a new passphrase.
+        </p>
+        <footer>
+            <a href="#" id="final-help-link">Help</a> | <a href="#" id="final-credits-link">Credits</a> | <a href="#" id="final-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Help Page: Provides instructions on how to use the app -->
+    <div id="help-page" class="screen">
+        <h2>Help</h2>
+        <p>Welcome to PassCraft! Follow these steps to generate a secure passphrase:</p>
+        <p>1. <strong>Settings</strong>: First-time users will see the Settings page. Choose your language, theme, and passphrase length. Click "Save" to proceed.</p>
+        <p>2. <strong>Home</strong>: Returning users start here. Click "Continue" to generate a passphrase, or "Settings" to change preferences.</p>
+        <p>3. <strong>Choose Method</strong>: Select "Enter Numbers" to input dice rolls manually, or "Roll for Me" to simulate dice rolls.</p>
+        <p>4. <strong>Enter Numbers</strong>: Roll 5 dice (or one die 5 times) to get a 5-digit number (e.g., 12345). Enter it and click "Next" for each word.</p>
+        <p>5. <strong>Roll for Me</strong>: Click "Roll Now" to generate a 5-digit number for each word automatically.</p>
+        <p>6. <strong>Result</strong>: Your passphrase is displayed! Use the buttons to:<br>
+        - <u>Copy</u> it to your clipboard.<br>
+        - <u>Memorize</u> it with a generic tip (or make your own).<br>
+        - <u>Strenghen</u> it with an uppercase letter, number, and symbol (you can revert to the original).<br>
+        - <u>Restart</u> to generate a new passphrase.
+        </p>
+        <p>For more information, visit the Credits or Developer pages from the footer.</p>
+        <!-- Back button to return to the previous page -->
+        <button id="help-back">Back</button>
+        <footer>
+            <a href="#" id="help-help-link">Help</a> | <a href="#" id="help-credits-link">Credits</a> | <a href="#" id="help-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Credits Page: Acknowledges sources and inspirations -->
+    <div id="credits-page" class="screen">
+        <h2>Credits</h2>
+        <p>PassCraft was inspired by the Diceware method created by Arnold G. Reinhold. Learn more at <a href="http://diceware.com" target="_blank" rel="noopener">diceware.com</a>.</p>
+        <p>We use wordlists from the Electronic Frontier Foundation (EFF), including their Large, Harry Potter, and Star Wars lists. Visit <a href="https://www.eff.org/dice" target="_blank" rel="noopener">eff.org/dice</a> for details.</p>
+        <p>PassCraft builds on these resources to provide a unique passphrase generation experience while respecting the original creators’ contributions.</p>
+        <button id="credits-back">Back</button>
+        <footer>
+            <a href="#" id="credits-help-link">Help</a> | <a href="#" id="credits-credits-link">Credits</a> | <a href="#" id="credits-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Developer Page: Information about the creators and a contact form -->
+    <div id="developer-page" class="screen">
+        <h2>Developer</h2>
+        <p>PassCraft was developed by Léa N. and her "coding crew."</p>
+        <p>The crew consisted of her Papa for general guidance and a little technical help from time to time, and a Large Language Model for coding assistance.</p>
+        <p>What started as a simple Grade 7 Science Fair project idea has grown into a fully functional app with real-world applications for many potential users of all ages.</p>
+        <p>Made with ❤ in Calgary, AB</p>
+        <!-- Contact form for user feedback -->
+        <div class="contact-form">
+            <input type="text" id="contact-name" placeholder="Your Name" required>
+            <input type="email" id="contact-email" placeholder="Your Email" required>
+            <textarea id="contact-message" placeholder="Your Message" required></textarea>
+            <!-- Feedback message for form submission -->
+            <p id="contact-feedback" class="hidden"></p>
+            <!-- Privacy note for the contact form -->
+            <p class="instruction">Your data will be sent securely via Formspree and used only to respond to your message.</p>
+        </div>
+        <!-- Send button for the contact form -->
+        <button id="contact-send">Send</button>
+        <button id="developer-back">Back</button>
+        <footer>
+            <a href="#" id="developer-help-link">Help</a> | <a href="#" id="developer-credits-link">Credits</a> | <a href="#" id="developer-developer-link">Developer</a>
+        </footer>
+    </div>
+
+    <!-- Link to the JavaScript file for app logic -->
+    <script src="script.js"></script>
+    <!-- Cloudflare script for challenge platform (auto-added, do not modify) -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933ebfc26c1372ed',t:'MTc0NTI1ODA5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

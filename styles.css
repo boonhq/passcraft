@@ -1,0 +1,386 @@
+/* Footer Styles: Styles for the footer navigation bar on all pages */
+footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #d3d3d3;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1; /* Ensure footer is above other elements */
+}
+
+/* Footer link styles */
+footer a,
+footer a:visited {
+    color: #d3d3d3 !important;
+    text-decoration: underline;
+    margin: 0 5px;
+}
+
+/* Footer link hover and active states */
+footer a:hover,
+footer a:active {
+    color: #4CAF50 !important;
+}
+
+/* Contact Form Styles: Styles for the feedback form on the Developer page */
+.contact-form {
+    margin-top: 20px;
+}
+
+/* Input and textarea styles for the contact form */
+.contact-form input,
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #888 !important;
+    border-radius: 5px !important;
+    padding: 8px !important;
+    font-size: 16px;
+    text-align: center !important;
+    box-sizing: border-box;
+}
+
+/* Specific styles for textarea in the contact form */
+.contact-form textarea {
+    height: 100px;
+    resize: vertical;
+    text-align: center !important;
+}
+
+/* Button styles for the contact form */
+.contact-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px auto;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    display: block;
+}
+
+/* Hover state for contact form button */
+.contact-form button:hover {
+    background-color: #45a049;
+}
+
+/* Active state for contact form button */
+.contact-form button:active {
+    transform: scale(0.95);
+}
+
+/* Feedback message styles for the contact form */
+.contact-form p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Success message style for the contact form */
+.contact-form p.success {
+    color: #4CAF50 !important;
+}
+
+/* Error message style for the contact form */
+.contact-form p.error {
+    color: #f44336;
+}
+
+/* Text Styles for Help, Credits, and Developer Pages */
+#help-page p,
+#credits-page p,
+#developer-page p {
+    color: #666 !important;
+    text-align: left !important;
+    padding: 0 40px !important;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+/* Link styles within Help, Credits, and Developer pages */
+#help-page p a,
+#credits-page p a,
+#developer-page p a {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+/* Hover state for links in Help, Credits, and Developer pages */
+#help-page p a:hover,
+#credits-page p a:hover,
+#developer-page p a:hover {
+    color: #45a049;
+}
+
+/* General Styles: Applied to the entire document */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content vertically by default (desktop) */
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* Screen Styles: Base styles for each page/section */
+.screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+    text-align: center;
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    border: 2px dashed #888;
+    opacity: 0;
+    transition: opacity 2.3s ease;
+    visibility: hidden;
+}
+
+/* Active state for screens (visible) */
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile Adjustments: Responsive styles for screens <= 768px (mobile devices) */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start; /* Align to top on mobile for scrolling */
+    }
+
+    /* Adjust Help, Credits, and Developer pages to be top-aligned and scrollable on mobile */
+    #help-page.screen,
+    #credits-page.screen,
+    #developer-page.screen {
+        top: 0;
+        transform: translateX(-50%); /* Only center horizontally */
+        margin-top: 20px; /* Add space from the top */
+        margin-bottom: 20px; /* Ensure space at the bottom for scrolling */
+    }
+}
+
+/* Heading Styles */
+h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+h2 {
+    color: #666;
+    font-size: 24px;
+}
+
+/* Greeting text style (used on Home page) */
+#greeting {
+    color: #4CAF50;
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+/* General paragraph styles */
+p {
+    color: #000;
+    font-size: 16px;
+}
+
+/* Button Styles: General styles for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    touch-action: none;
+    min-width: 48px;
+    min-height: 48px;
+}
+
+/* Button hover state */
+button:hover {
+    background-color: #45a049;
+}
+
+/* Button active state */
+button:active {
+    transform: scale(0.95);
+}
+
+/* Disabled button state */
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Specific styles for the Reset button in Settings */
+#settings-reset {
+    background-color: #f44336;
+}
+
+/* Hover state for the Reset button */
+#settings-reset:hover {
+    background-color: #d32f2f;
+}
+
+/* Hidden elements (used for toggling visibility) */
+.hidden {
+    display: none;
+}
+
+/* Input and Textarea Styles: General styles for form inputs */
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Readonly input style for Roll page */
+#roll-page input[type="text"][readonly] {
+    background-color: #f5f5f5;
+    border: 2px solid #4CAF50;
+    font-style: italic;
+    color: #333;
+}
+
+/* Counter and passphrase display styles for Enter and Roll pages */
+#enter-counter, #roll-counter,
+#enter-passphrase-display, #roll-passphrase-display {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Final passphrase display style */
+#final-passphrase {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: pop 0.5s ease;
+}
+
+/* Instruction text style */
+.instruction {
+    color: #888;
+    font-style: italic;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Disabled select dropdown style */
+select:disabled {
+    background-color: #e0e0e0;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Paragraph spacing in Settings page */
+#settings-page p {
+    margin: 15px 0;
+}
+
+/* Button layout in Home page */
+#home-page button {
+    display: inline-block;
+    margin: 10px 5px;
+}
+
+/* Method selection buttons layout */
+#method-page .method-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Specific width for method selection buttons */
+#method-page .method-buttons button {
+    width: 200px;
+}
+
+/* Button spacing in Final page */
+#final-page button {
+    margin: 10px;
+    padding: 12px 24px;
+}
+
+/* Copy feedback message style */
+#copy-feedback {
+    color: #4CAF50;
+    font-size: 14px;
+    margin: 5px 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Visible state for copy feedback */
+#copy-feedback.visible {
+    opacity: 1;
+}
+
+/* Hidden state for copy feedback */
+#copy-feedback.hidden {
+    opacity: 0;
+}
+
+/* Mnemonic Tip Section: Styles for the memorization tip on the Final page */
+.mnemonic-tip {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Paragraph style within mnemonic tip */
+.mnemonic-tip p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Strong text style within mnemonic tip */
+.mnemonic-tip strong {
+    color: #333;
+}
+
+/* Animation for the final passphrase display */
+@keyframes pop {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
